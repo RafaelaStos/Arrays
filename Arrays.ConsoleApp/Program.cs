@@ -9,8 +9,6 @@ namespace Arrays.ConsoleApp
         {
             int[] sequencia = [-5, 3, 4, 5, 9, 6, 10, -2, 11, 1, 2, 6, 7, 8, 0, -6];
 
-            // string opcao= MostrarMenu();
-
 
             MaiorValor(sequencia);
             MenorValor(sequencia);
@@ -18,8 +16,7 @@ namespace Arrays.ConsoleApp
             NumerosNegativos(sequencia);
             MostrarSequencia(sequencia);
             remocao(sequencia);
-            NovaSequencia(sequencia);
-
+            EncontrarMaioresValores(sequencia);
         }
 
         private static void MostrarSequencia(int[] sequencia)
@@ -42,7 +39,7 @@ namespace Arrays.ConsoleApp
             Console.WriteLine($"O maior número da sequencia é: {valor}");
         }
 
-         static void MenorValor(int[] sequencia)
+        static void MenorValor(int[] sequencia)
         {
 
             for (int i = 0; i < sequencia.Length; i++)
@@ -54,7 +51,7 @@ namespace Arrays.ConsoleApp
             Console.WriteLine($"O menor número da sequencia é: {valor}");
         }
 
-         static void ValorMedio(int[] sequencia)
+        static void ValorMedio(int[] sequencia)
         {
             int media, soma = 0;
             for (int i = 0; i < sequencia.Length; i++)
@@ -66,7 +63,7 @@ namespace Arrays.ConsoleApp
             Console.WriteLine($"O valor médio é: {media}");
         }
 
-         static void NumerosNegativos(int[] sequencia)
+        static void NumerosNegativos(int[] sequencia)
         {
             for (int i = 0; i < sequencia.Length; i++)
             {
@@ -80,37 +77,44 @@ namespace Arrays.ConsoleApp
             }
         }
 
-         static void remocao(int[] sequencia)
+        static void remocao(int[] sequencia)
         {
-            Console.WriteLine("Digite o numero para remover da sequencia:");
+            Console.WriteLine("\nDigite o numero para remover da sequencia:");
             int remover = Convert.ToInt32(Console.ReadLine());
 
+            int[] novaSequencia = new int[sequencia.Length - 1];
             int cont = 0;
             for (int i = 0; i < sequencia.Length; i++)
             {
                 if (sequencia[i] != remover)
                 {
+
+
+                    novaSequencia[cont] = sequencia[i];
                     cont++;
                 }
-                else break;
             }
-
-            for (int i = cont; i < sequencia.Length - 1; i++)
+            for (int i = 0; i < novaSequencia.Length; i++)
             {
-
-                sequencia[i] = sequencia[i + 1];
-            }
-        }
-
-         static void NovaSequencia(int[] sequencia)
-        {
-            for (int i = 0; i < sequencia.Length - 1; i++)
-            {
-                Console.Write($"{sequencia[i]} ");
+               
+       
+             Console.Write($"{novaSequencia[i]} ");
             }
             Console.WriteLine();
         }
 
+        private static void EncontrarMaioresValores(int[] sequencia)
+        {
+            int[] copia = new int[sequencia.Length];
+
+            Array.Copy(sequencia, copia, sequencia.Length);
+
+            Array.Sort(copia);
+
+            Array.Reverse(copia);
+
+            Console.WriteLine($"\nOs 3 maior valores são: [{copia[0]}, {copia[1]}, {copia[2]}]");
+        }
 
     }
 }
